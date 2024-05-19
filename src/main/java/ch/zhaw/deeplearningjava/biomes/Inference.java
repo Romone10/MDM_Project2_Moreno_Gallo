@@ -36,7 +36,6 @@ public class Inference {
             Path modelDir = Paths.get("models");
             model.load(modelDir, MODEL_NAME);
 
-            // define a translator for pre and post processing
             Translator<Image, Classifications> translator = ImageClassificationTranslator.builder()
                     .addTransform(new Resize(IMAGE_WIDTH, IMAGE_HEIGHT))
                     .addTransform(new ToTensor())
@@ -62,7 +61,7 @@ public class Inference {
         Block resNet50 = ResNetV1.builder()
                 .setImageShape(new ai.djl.ndarray.types.Shape(3, IMAGE_HEIGHT, IMAGE_WIDTH))
                 .setNumLayers(50)
-                .setOutSize(6)  // Number of output classes
+                .setOutSize(6)
                 .build();
         model.setBlock(resNet50);
         return model;

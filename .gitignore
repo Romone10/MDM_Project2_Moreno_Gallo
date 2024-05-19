@@ -33,6 +33,5 @@ build/
 .vscode/
 
 ### Others ###
-/models
-/images/
-/images
+images/
+models/

@@ -38,38 +38,27 @@ public final class BiomesTrainer {
 
     public static void main(String[] args) throws IOException, TranslateException {
 
-        // Modellverzeichnis festlegen
         Path modelDirectory = Paths.get("models");
 
-        // Datensatz erstellen
         ImageFolder imageDataset = createDataset("images");
 
-        // Datensatz aufteilen
         RandomAccessDataset[] datasetSplits = imageDataset.randomSplit(8, 2);
 
-        // Verlustfunktion definieren
         Loss trainingLoss = Loss.softmaxCrossEntropyLoss();
 
-        // Trainingskonfiguration einrichten
         TrainingConfig trainingConfig = configureTraining(trainingLoss);
 
-        // Modell erhalten und Trainer initialisieren
         Model neuralModel = initializeModel();
         Trainer trainingManager = neuralModel.newTrainer(trainingConfig);
 
-        // Metriken setzen
         trainingManager.setMetrics(new Metrics());
 
-        // Eingabeform festlegen
         Shape inputShape = new Shape(1, 3, IMAGE_HEIGHT, IMAGE_WIDTH);
 
-        // Trainer initialisieren
         trainingManager.initialize(inputShape);
 
-        // Training starten
         EasyTrain.fit(trainingManager, NUM_EPOCHS, datasetSplits[0], datasetSplits[1]);
 
-        // Trainingsergebnisse speichern
         saveTrainingResults(neuralModel, trainingManager, modelDirectory, imageDataset);
 
     }
@@ -112,13 +101,12 @@ public final class BiomesTrainer {
         neuralModel.setProperty("Loss", String.format("%.5f", trainingResult.getValidateLoss()));
         neuralModel.save(modelDirectory, MODEL_NAME);
         
-        // Synset-Datei speichern
         List<String> synset = extractSynset(imageDataset);
         saveSynset(modelDirectory, synset);
     }
 
     private static List<String> extractSynset(ImageFolder dataset) {
-        // Extrahiere die Klassennamen aus dem ImageFolder-Dataset
+        
         return dataset.getClasses().stream().sorted().collect(Collectors.toList());
     }
 
