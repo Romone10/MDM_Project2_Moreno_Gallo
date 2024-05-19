@@ -1,6 +1,3 @@
-buildings
-forest
-glacier
-mountain
-sea
-street
+version https://git-lfs.github.com/spec/v1
+oid sha256:0df8d67908c0fcef59e6921d06a88c9b8ac93448bee8688bf8388678578c1789
+size 44
