@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Image Classification</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" async></script>
+    <style>
+        body {
+            background-color: #2e2e2e; /* Dunkelgrauer/schwarzer Hintergrund */
+            color: white; /* Weiße Schriftfarbe */
+        }
+
+        .biomes-title {
+            font-size: 10em;
+            font-weight: bold;
+            letter-spacing: 0.2em;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 2px;
+            color: white; /* Weiße Schriftfarbe */
+        }
+
+        .classification-subtitle {
+            font-size: 2em;
+            text-align: center;
+            color: white; /* Weiße Schriftfarbe */
+        }
+
+        .upload-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .upload-button {
+            display: inline-block;
+        }
+
+        .table-center {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            color: white; /* Weiße Schriftfarbe */
+            border: 1px solid white; /* Weiße Tabellenlinien */
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+            text-align: center;
+            border: 1px solid white; /* Weiße Tabellenlinien */
+        }
+
+        .answer-container,
+        .preview-container {
+            text-align: center;
+        }
+
+        #preview {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Zusätzliche Stile für Eingabefelder */
+        input[type="file"] {
+            color: white; /* Weiße Schriftfarbe für Eingabefelder */
+        }
+
+        .chart-container {
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <h1 class="biomes-title">BIOMES</h1>
+        <p class="classification-subtitle">Classification by gallomor</p>
+
+        <div class="upload-button-container">
+            <input type="file" accept="image/png, image/jpeg" class="form-control-file upload-button" id="image" name="image"
+                onchange="checkFiles(this.files);">
+        </div>
+
+        <div id="answerPart" style="visibility: hidden;">
+            <p class="answer-container"><b>Answer:</b></p>
+            <div id="answer" class="answer-container"></div>
+
+            <div class="chart-container">
+                <canvas id="probabilityChart"></canvas>
+            </div>
+
+            <p class="preview-container"><b>Analyzed Image:</b></p>
+            <p class="preview-container"><img id="preview" width="300" src="#" alt="preview" /></p>
+        </div>
+    </div>
+
+</body>
+
+</html>
